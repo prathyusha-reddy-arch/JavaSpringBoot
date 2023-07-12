@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 
@@ -71,7 +72,7 @@ public class SubmissionServiceImplTest {
     }
 
     @Test
-    public void test_delSubmission(){
+    public void testDelSubmission(){
         SubmissionForm mockSubmission = getSubmissionForm("123","prathyusha","07/11/2023","tejan",78,"Hari","Java","Gopi");
 
         when(repo.deleteSubmission("prathyusha")).thenReturn(true);
@@ -82,7 +83,7 @@ public class SubmissionServiceImplTest {
     }
 
     @Test
-    public void test_updateSubmission(){
+    public void testUpdateSubmission(){
         SubmissionForm mockSubmission = getSubmissionForm("123","prathyusha","07/11/2023","tejan",78,"Hari","Java","Gopi");
 
         when(repo.updateSubmission(mockSubmission)).thenReturn(mockSubmission);
@@ -90,6 +91,15 @@ public class SubmissionServiceImplTest {
         SubmissionForm result = submissionService.updateSubmission(mockSubmission);
 
         Assertions.assertNotNull(result);
+    }
+
+    @Test
+    public void testGetAllSubmission(){
+        SubmissionForm mockSubmission = getSubmissionForm("123","prathyusha","07/11/2023","tejan",78,"Hari","Java","Gopi");
+
+        when(repo.getAll()).thenReturn((List<SubmissionForm>) mockSubmission);
+        List<SubmissionForm> sform= submissionService.getAll();
+        Assertions.assertNotNull(sform);
     }
 
 }
