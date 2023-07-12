@@ -5,28 +5,30 @@ import com.java.SubmissionForm.Repository.SubmissionFormRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
 
 import static org.mockito.Mockito.when;
 
+
+@ExtendWith(MockitoExtension.class)
 public class SubmissionServiceImplTest {
 
 
+    @InjectMocks
     SubmissionServiceImpl submissionService;
+
+
     SubmissionForm dto;
 
 
+    @Mock
     SubmissionFormRepositoryImpl repo;
 
-    @BeforeEach
-    public void setup(){
-        repo= new SubmissionFormRepositoryImpl();
-        dto = getSubmissionForm("123","prathyusha","07/11/2023","tejan",78,"Hari","Java","Gopi");
-        repo.s = new HashMap<String,SubmissionForm>() ;
-        repo. s.put(dto.getId(),dto);
-    }
 
     public static SubmissionForm getSubmissionForm(String id, String consultantName, String submissionDate, String leadName, int rate, String technology, String vendorName, String salesPersonName ) {
         SubmissionForm sform = new SubmissionForm();
@@ -44,8 +46,50 @@ public class SubmissionServiceImplTest {
 
     @Test
     public void testGetSubmission(){
-        SubmissionForm sform=getSubmissionForm("1234","Swathi","07/11/2023","Kranthi",78,"Hari","Java","Gopi");
-      SubmissionForm s= submissionService.getSubmission("1234");
-        Assertions.assertNotNull(s);
+
+
+        SubmissionForm mockSubmission =getSubmissionForm("123","prathyusha","07/11/2023","tejan",78,"Hari","Java","Gopi");
+
+        when(repo.getSubmission("123")).thenReturn(mockSubmission);
+
+        SubmissionForm result = submissionService.getSubmission("123");
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals("Gopi",result.getSalesPersonName());
     }
+
+    @Test
+    public void testAddSubmission(){
+        SubmissionForm mockSubmission = getSubmissionForm("123","prathyusha","07/11/2023","tejan",78,"Hari","Java","Gopi");
+
+        when(repo.addSubmission(mockSubmission)).thenReturn(mockSubmission);
+
+        SubmissionForm result = submissionService.addSubmission(mockSubmission);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals("Gopi",result.getSalesPersonName());
+    }
+
+    @Test
+    public void test_delSubmission(){
+        SubmissionForm mockSubmission = getSubmissionForm("123","prathyusha","07/11/2023","tejan",78,"Hari","Java","Gopi");
+
+        when(repo.deleteSubmission("prathyusha")).thenReturn(true);
+
+        boolean result = submissionService.deleteSubmission("prathyusha");
+
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void test_updateSubmission(){
+        SubmissionForm mockSubmission = getSubmissionForm("123","prathyusha","07/11/2023","tejan",78,"Hari","Java","Gopi");
+
+        when(repo.updateSubmission(mockSubmission)).thenReturn(mockSubmission);
+
+        SubmissionForm result = submissionService.updateSubmission(mockSubmission);
+
+        Assertions.assertNotNull(result);
+    }
+
 }
