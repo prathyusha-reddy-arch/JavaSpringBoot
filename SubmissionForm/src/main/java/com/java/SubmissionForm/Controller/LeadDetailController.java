@@ -33,6 +33,11 @@ public class LeadDetailController {
 
   //  @PutMapping("/updateLead")
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteLead(@PathVariable long id){
+        service.deleteLeadDetail(id);
+    }
+
 
 
 }

@@ -12,4 +12,5 @@ public interface ILeadDetailService {
     LeadDetail addLeadDetails(LeadDetail leadDetail);
 
     LeadDetail updateLeadDetails(LeadDetail leadDetail);
+    void deleteLeadDetail(long id);
 }

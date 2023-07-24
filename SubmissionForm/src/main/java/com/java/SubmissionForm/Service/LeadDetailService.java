@@ -34,5 +34,10 @@ public class LeadDetailService implements ILeadDetailService{
         return null;
     }
 
+    @Override
+    public void deleteLeadDetail(long id) {
+        repo.deleteById(id);
+    }
+
 
 }
