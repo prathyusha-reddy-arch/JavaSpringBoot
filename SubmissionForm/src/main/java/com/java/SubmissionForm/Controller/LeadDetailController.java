@@ -31,7 +31,10 @@ public class LeadDetailController {
         return service.addLeadDetails(leadDetail);
     }
 
-  //  @PutMapping("/updateLead")
+  @PutMapping("/updateLead")
+  public LeadDetail updateLeadDetail(@RequestBody LeadDetail leadDetail){
+        return service.updateLeadDetails(leadDetail);
+  }
 
     @DeleteMapping("/delete/{id}")
     public void deleteLead(@PathVariable long id){
