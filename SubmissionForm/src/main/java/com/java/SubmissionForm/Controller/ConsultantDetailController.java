@@ -22,18 +22,18 @@ public class ConsultantDetailController {
     }
 
     @RequestMapping("/id/{id}")
-    public Optional<ConsultantDetail> getLeadById(@PathVariable long id)
+    public Optional<ConsultantDetail> getConsultantById(@PathVariable long id)
     {
         return service.getConsultantByID(id);
     }
 
     @PostMapping("/addConsultant")
-    public ConsultantDetail addLeadDetail(@RequestBody ConsultantDetail consultantDetail){
+    public ConsultantDetail addConsultantDetail(@RequestBody ConsultantDetail consultantDetail){
         return service.addConsultantDetails(consultantDetail);
     }
 
-    @PutMapping("/updateLead")
-    public ConsultantDetail updateLeadDetail(@RequestBody ConsultantDetail consultantDetail){
+    @PutMapping("/updateConsultant")
+    public ConsultantDetail updateConsultantDetail(@RequestBody ConsultantDetail consultantDetail){
         return service.updateConsultantDetails(consultantDetail);
     }
 

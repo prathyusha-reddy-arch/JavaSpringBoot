@@ -1,9 +1,6 @@
 package com.java.SubmissionForm.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -19,6 +16,9 @@ public class ConsultantDetail {
     private String lastName;
     private String email;
     private String phoneNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="lead_id")
+    private LeadDetail leadDetail;
 
 
 }
